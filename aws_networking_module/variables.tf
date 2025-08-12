@@ -1,3 +1,12 @@
+variable "region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "name_prefix" {
+  description = "Prefix to use for naming AWS resources"
+  type        = string
+}
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
@@ -13,17 +22,3 @@ variable "private_subnet_cidr" {
   type        = string
 }
 
-variable "region" {
-  description = "AWS region"
-  type        = string
-}
-
-variable "availability_zone" {
-  description = "Availability zone for the subnets"
-  type        = string
-}
-
-variable "name_prefix" {
-  description = "Prefix to use for naming AWS resources"
-  type        = string
-}
