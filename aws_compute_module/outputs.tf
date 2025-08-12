@@ -1,0 +1,16 @@
+
+output "instance_id" {
+  description = "The ID of the EC2 instance"
+  value       = aws_instance.ec2_instance.id
+}
+
+output "private_ip" {
+  description = "The private IP address of the EC2 instance"
+  value       = aws_instance.ec2_instance.private_ip
+}
+
+output "public_ip" {
+  description = "The public IP address of the EC2 instance (if applicable)"
+  value       = aws_eip.eip[0].public_ip
+  condition   = var.public_instance
+}
