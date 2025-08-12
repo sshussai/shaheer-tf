@@ -34,7 +34,6 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_eip" "nat" {
-  vpc = true
   tags = {
     Name = "${var.name_prefix}-eip"
   }
