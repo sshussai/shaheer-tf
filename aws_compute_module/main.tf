@@ -1,7 +1,7 @@
 resource "aws_key_pair" "generated" {
   count      = var.ssh_key_name == null ? 1 : 0
   key_name   = "${var.name_prefix}-key"
-  public_key = tls_private_key.generated.public_key_openssh
+  public_key = tls_private_key.generated[0].public_key_openssh
 }
 
 resource "tls_private_key" "generated" {
@@ -63,7 +63,6 @@ resource "aws_instance" "ec2" {
 
 resource "aws_eip" "eip" {
   count = var.public_instance ? 1 : 0
-  vpc   = true
   tags = {
     Name = "${var.name_prefix}-eip"
   }
