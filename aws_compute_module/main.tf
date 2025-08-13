@@ -44,7 +44,7 @@ resource "aws_network_interface" "eni" {
 
 resource "aws_instance" "ec2" {
   ami           = var.ami_id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
   key_name      = var.ssh_key_name != null ? var.ssh_key_name : aws_key_pair.generated[0].key_name
   network_interface {
     network_interface_id = aws_network_interface.eni.id

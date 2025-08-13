@@ -14,6 +14,12 @@ variable "ssh_key_name" {
   default     = null
 }
 
+variable "instance_type" {
+  description = "Ec2 instance type"
+  type        = string
+  default     = "t3.micro"
+}
+
 variable "public_instance" {
   description = "Whether the instance should be public (with an EIP)"
   type        = bool
