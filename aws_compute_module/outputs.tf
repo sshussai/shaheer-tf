@@ -12,5 +12,4 @@ output "private_ip" {
 output "public_ip" {
   description = "The public IP address of the EC2 instance (if applicable)"
   value       = aws_eip.eip[0].public_ip
-  condition   = var.public_instance
 }
