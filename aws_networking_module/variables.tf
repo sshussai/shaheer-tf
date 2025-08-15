@@ -7,6 +7,7 @@ variable "name_prefix" {
   description = "Prefix to use for naming AWS resources"
   type        = string
 }
+
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
