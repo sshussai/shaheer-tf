@@ -6,7 +6,7 @@ output "bucket_id" {
 output "ownership_controls" {
   description = "S3 bucket ownership controls if configured"
   # value       = try(aws_s3_bucket_ownership_controls.ownership_controls[0], "S3 bucket ownership controls not available")
-  value = var.ownership_controls ? aws_s3_bucket_ownership_controls.ownership_controls[0] : {}
+  value = var.ownership_controls ? aws_s3_bucket_ownership_controls.ownership_controls[0].rule : {}
 }
 
 output "bucket_acl" {
