@@ -73,7 +73,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket_config" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "versioning_bucket_config" {
-  count = var.lifecycle_rule ? 0 : (var.versioning ? 1 : 0)
+  count = var.lifecycle_rule ? (var.versioning ? 1 : 0) : 0
   # Must have bucket versioning enabled first
   depends_on = [aws_s3_bucket_versioning.versioning[0]]
 
