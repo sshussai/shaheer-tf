@@ -17,19 +17,24 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_subnet" "public" {
+  count                   = length(var.public_subnet_cidrs)
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.public_subnet_cidr
+  cidr_block              = var.public_subnet_cidrs[count.index]
   map_public_ip_on_launch = true
+
   tags = {
-    Name = "${var.name_prefix}-public-subnet"
+    Name = "${var.name_prefix}-public${count.index}-subnet"
   }
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = var.private_subnet_cidr
+  count                   = length(var.private_subnet_cidrs)
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.private_subnet_cidrs[count.index]
+  map_public_ip_on_launch = true
+
   tags = {
-    Name = "${var.name_prefix}-private-subnet"
+    Name = "${var.name_prefix}-private${count.index}-subnet"
   }
 }
 
@@ -41,7 +46,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public.id
+  subnet_id     = aws_subnet.public[0].id
   tags = {
     Name = "${var.name_prefix}-nat-gateway"
   }
@@ -74,11 +79,13 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public.id
+  count          = length(var.public_subnet_cidrs)
+  subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
 
 resource "aws_route_table_association" "private" {
-  subnet_id      = aws_subnet.private.id
+  count          = length(var.private_subnet_cidrs)
+  subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private.id
 }
