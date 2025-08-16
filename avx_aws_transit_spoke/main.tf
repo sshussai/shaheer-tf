@@ -108,3 +108,16 @@ resource "aviatrix_transit_gateway_peering" "transit_gateway_peering" {
   transit_gateway_name1 = aviatrix_transit_gateway.transit_gw1.gw_name
   transit_gateway_name2 = aviatrix_transit_gateway.transit_gw2.gw_name
 }
+
+# Create an Aviatrix Spoke Transit Attachment
+resource "aviatrix_spoke_transit_attachment" "attachment1" {
+  count           = var.attach_transit_spoke_gateways ? 1 : 0
+  spoke_gw_name   = aviatrix_spoke_gateway.spoke_gw1.gw_name
+  transit_gw_name = aviatrix_transit_gateway.transit_gw1.gw_name
+}
+
+resource "aviatrix_spoke_transit_attachment" "attachment2" {
+  count           = var.attach_transit_spoke_gateways ? 1 : 0
+  spoke_gw_name   = aviatrix_spoke_gateway.spoke_gw2.gw_name
+  transit_gw_name = aviatrix_transit_gateway.transit_gw2.gw_name
+}

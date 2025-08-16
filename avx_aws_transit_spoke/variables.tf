@@ -21,6 +21,8 @@ variable "transit_gw1_vpc_reg" {
 }
 
 variable "transit_gw1_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "Subnet for the first Aviatrix Transit Gateway"
   type        = string
 }
@@ -32,6 +34,8 @@ variable "transit_gw1_gw_size" {
 }
 
 variable "transit_gw1_ha_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "HA subnet for the first Aviatrix Transit Gateway"
   type        = string
   default     = ""
@@ -104,6 +108,8 @@ variable "transit_gw2_vpc_reg" {
 }
 
 variable "transit_gw2_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "Subnet for the second Aviatrix Transit Gateway"
   type        = string
 }
@@ -115,6 +121,8 @@ variable "transit_gw2_gw_size" {
 }
 
 variable "transit_gw2_ha_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "HA subnet for the second Aviatrix Transit Gateway"
   type        = string
   default     = ""
@@ -187,6 +195,8 @@ variable "spoke_gw1_vpc_reg" {
 }
 
 variable "spoke_gw1_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "Subnet for the first Aviatrix Spoke Gateway"
   type        = string
 }
@@ -234,6 +244,8 @@ variable "spoke_gw1_ha_insane_mode_az" {
 }
 
 variable "spoke_gw1_ha_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "HA subnet for the first Aviatrix Spoke Gateway"
   type        = string
   default     = ""
@@ -264,6 +276,8 @@ variable "spoke_gw2_vpc_reg" {
 }
 
 variable "spoke_gw2_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "Subnet for the second Aviatrix Spoke Gateway"
   type        = string
 }
@@ -311,6 +325,8 @@ variable "spoke_gw2_ha_insane_mode_az" {
 }
 
 variable "spoke_gw2_ha_subnet" {
+  # for insane_mode, do not use existing subnet cidrs
+  # for non-insane_mode, use existing subnet cidrs
   description = "HA subnet for the second Aviatrix Spoke Gateway"
   type        = string
   default     = ""
@@ -320,6 +336,12 @@ variable "spoke_gw2_ha_subnet" {
 
 variable "peer_transit_gateways" {
   description = "Peer transit gateways"
+  type        = bool
+  default     = true
+}
+
+variable "attach_transit_spoke_gateways" {
+  description = "Attach transit_gw1 to spoke_gw1 and transit_gw2 to spoke_gw2"
   type        = bool
   default     = true
 }
