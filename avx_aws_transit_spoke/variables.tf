@@ -28,7 +28,7 @@ variable "transit_gw1_subnet" {
 variable "transit_gw1_gw_size" {
   description = "Instance size for the first Aviatrix Transit Gateway"
   type        = string
-  default     = "c5n.xlarge"  # Default value can be adjusted as needed
+  default     = "c5n.xlarge" # Default value can be adjusted as needed
 }
 
 variable "transit_gw1_ha_subnet" {
@@ -53,6 +53,18 @@ variable "transit_gw1_enable_insane_mode" {
   description = "Enable Insane Mode for the first Aviatrix Transit Gateway"
   type        = bool
   default     = true
+}
+
+variable "transit_gw1_insane_mode_az" {
+  description = "AZ for Insane Mode for the first Aviatrix Transit Gateway"
+  type        = string
+  default     = ""
+}
+
+variable "transit_gw1_ha_insane_mode_az" {
+  description = "HA AZ for Insane Mode for the first Aviatrix Transit Gateway"
+  type        = string
+  default     = ""
 }
 
 variable "transit_gw1_enable_hybrid_connection" {
@@ -126,6 +138,18 @@ variable "transit_gw2_enable_insane_mode" {
   default     = true
 }
 
+variable "transit_gw2_insane_mode_az" {
+  description = "AZ for Insane Mode for the second Aviatrix Transit Gateway"
+  type        = string
+  default     = ""
+}
+
+variable "transit_gw2_ha_insane_mode_az" {
+  description = "HA AZ for Insane Mode for the second Aviatrix Transit Gateway"
+  type        = string
+  default     = ""
+}
+
 variable "transit_gw2_enable_hybrid_connection" {
   description = "Enable hybrid connection for the second Aviatrix Transit Gateway"
   type        = bool
@@ -197,6 +221,18 @@ variable "spoke_gw1_enable_insane_mode" {
   default     = true
 }
 
+variable "spoke_gw1_insane_mode_az" {
+  description = "AZ for Insane Mode for the first Aviatrix Spoke Gateway"
+  type        = string
+  default     = ""
+}
+
+variable "spoke_gw1_ha_insane_mode_az" {
+  description = "HA AZ for Insane Mode for the first Aviatrix Spoke Gateway"
+  type        = string
+  default     = ""
+}
+
 variable "spoke_gw1_ha_subnet" {
   description = "HA subnet for the first Aviatrix Spoke Gateway"
   type        = string
@@ -250,7 +286,7 @@ variable "spoke_gw2_enable_bgp" {
   default     = true
 }
 
-variable "spoke_gw1_local_as_number" {
+variable "spoke_gw2_local_as_number" {
   description = "Local AS number for the second Aviatrix Spoke Gateway"
   type        = string
   default     = "65004"
@@ -260,6 +296,18 @@ variable "spoke_gw2_enable_insane_mode" {
   description = "Enable Insane Mode for the second Aviatrix Spoke Gateway"
   type        = bool
   default     = true
+}
+
+variable "spoke_gw2_insane_mode_az" {
+  description = "AZ for Insane Mode for the second Aviatrix Spoke Gateway"
+  type        = string
+  default     = ""
+}
+
+variable "spoke_gw2_ha_insane_mode_az" {
+  description = "HA AZ for Insane Mode for the second Aviatrix Spoke Gateway"
+  type        = string
+  default     = ""
 }
 
 variable "spoke_gw2_ha_subnet" {
