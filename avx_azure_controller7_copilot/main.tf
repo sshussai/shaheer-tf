@@ -34,7 +34,7 @@ resource "azurerm_public_ip" "cp_public_ip" {
 }
 
 locals {
-  subnet_id = var.subnet_id == ? azurerm_subnet.subnet[0].id : var.subnet_id
+  subnet_id = var.subnet_id == "" ? azurerm_subnet.subnet[0].id : var.subnet_id
 }
 
 resource "azurerm_network_interface" "ct_nic" {
@@ -46,7 +46,7 @@ resource "azurerm_network_interface" "ct_nic" {
     name                          = "internal"
     subnet_id                     = local.subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
+    public_ip_address_id          = azurerm_public_ip.ct_public_ip.id
   }
 }
 
@@ -59,7 +59,7 @@ resource "azurerm_network_interface" "cp_nic" {
     name                          = "internal"
     subnet_id                     = local.subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
+    public_ip_address_id          = azurerm_public_ip.cp_public_ip.id
   }
 }
 
@@ -87,7 +87,6 @@ resource "azurerm_linux_virtual_machine" "ct" {
     offer        = "aviatrix-controller"
     sku          = "aviatrix-controller-g3"
     version      = "20240923.1605.0"
-    exactVersion = "20240923.1605.0"
   }
 }
 
@@ -115,7 +114,6 @@ resource "azurerm_linux_virtual_machine" "cp" {
     offer        = "aviatrix-copilot"
     sku          = "avx-cplt-byol-02"
     version      = "4.12.0"
-    exactVersion = "4.12.0"
   }
 }
 

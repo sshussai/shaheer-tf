@@ -3,11 +3,11 @@ output "resource_group_name" {
 }
 
 output "virtual_network_name" {
-  value = azurerm_virtual_network.vnet.name
+  value = try(azurerm_virtual_network.vnet[0].name, "No VNet created")
 }
 
 output "subnet_id" {
-  value = azurerm_subnet.subnet.id
+  value = local.subnet_id
 }
 
 output "controller_public_ip_address" {
