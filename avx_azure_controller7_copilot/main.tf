@@ -70,7 +70,7 @@ resource "azurerm_linux_virtual_machine" "ct" {
   size                            = var.vm_size
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
-  disable_password_authentication = true
+  disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.ct_nic.id,
   ]
@@ -104,7 +104,7 @@ resource "azurerm_linux_virtual_machine" "cp" {
   size                            = var.vm_size
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
-  disable_password_authentication = true
+  disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.cp_nic.id,
   ]
