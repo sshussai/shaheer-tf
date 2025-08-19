@@ -137,7 +137,7 @@ resource "azurerm_network_security_group" "cp_nsg" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_network_security_rule" "https_rule" {
+resource "azurerm_network_security_rule" "cp_https_rule" {
   name                        = "Allow-HTTPS"
   priority                    = 100
   direction                   = "Inbound"
@@ -190,7 +190,7 @@ resource "azurerm_network_security_group" "ct_nsg" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_network_security_rule" "https_rule" {
+resource "azurerm_network_security_rule" "ct_https_rule" {
   name                        = "Allow-HTTPS"
   priority                    = 100
   direction                   = "Inbound"
