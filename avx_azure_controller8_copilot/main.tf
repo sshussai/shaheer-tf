@@ -138,6 +138,22 @@ resource "azurerm_linux_virtual_machine" "cp" {
   }
 }
 
+resource "azurerm_managed_disk" "data_disk" {
+  name                 = "${var.name_prefix}-cp-datadisk"
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "10"
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "vm_disk_attach" {
+  managed_disk_id    = azurerm_managed_disk.data_disk.id
+  virtual_machine_id = var.azurerm_linux_virtual_machine.cp.id
+  lun                = 0
+  caching            = "ReadWrite"
+}
+
 resource "azurerm_network_security_group" "cp_nsg" {
   name                = "${var.name_prefix}-cp-nsg"
   location            = var.location
