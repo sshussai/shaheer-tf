@@ -82,11 +82,18 @@ resource "azurerm_linux_virtual_machine" "ct" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
+  plan {
+    name      = "aviatrix-controller-g3"
+    publisher = "aviatrix-systems"
+    product   = "aviatrix-controller"
+  }
+
   source_image_reference {
-    publisher    = "aviatrix-systems"
-    offer        = "aviatrix-controller"
-    sku          = "aviatrix-controller-g3"
-    version      = "20240923.1605.0"
+    publisher = "aviatrix-systems"
+    offer     = "aviatrix-controller"
+    sku       = "aviatrix-controller-g3"
+    version   = "20240923.1605.0"
   }
 }
 
@@ -109,11 +116,18 @@ resource "azurerm_linux_virtual_machine" "cp" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
+  plan {
+    name      = "avx-cplt-byol-02"
+    publisher = "aviatrix-systems"
+    product   = "aviatrix-copilot"
+  }
+
   source_image_reference {
-    publisher    = "aviatrix-systems"
-    offer        = "aviatrix-copilot"
-    sku          = "avx-cplt-byol-02"
-    version      = "4.12.0"
+    publisher = "aviatrix-systems"
+    offer     = "aviatrix-copilot"
+    sku       = "avx-cplt-byol-02"
+    version   = "4.12.0"
   }
 }
 
@@ -139,7 +153,7 @@ resource "azurerm_network_security_rule" "https_rule" {
 
 resource "azurerm_network_security_rule" "netflow_rule" {
   name                        = "Allow-Netflow"
-  priority                    = 100
+  priority                    = 200
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Udp"
@@ -153,7 +167,7 @@ resource "azurerm_network_security_rule" "netflow_rule" {
 
 resource "azurerm_network_security_rule" "syslog_rule" {
   name                        = "Allow-Syslog"
-  priority                    = 100
+  priority                    = 300
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Udp"
